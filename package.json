@@ -2,6 +2,14 @@
   "name": "omdb",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "prettify:all": "prettier --write \"{,!(node_modules, .idea)/**/}*.js\"",
+    "lint": "eslint src/**/*.js --fix --max-warnings=0"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -10,11 +18,24 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.9",
+    "node-sass": "^4.14.1",
+    "prettier": "^2.0.5",
+    "sass": "^1.26.8"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "npm run lint",
+      "npm run prettify:all",
+      "git add ."
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
